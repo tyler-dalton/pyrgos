@@ -1,51 +1,63 @@
-# Faro
+# Pyrgos
 
-A Helm-based observability stack for Kubernetes, providing standardized monitoring, visualization, and alerting through cloud-native tooling.
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=flat&logo=kubernetes&logoColor=white)](https://kubernetes.io)
+[![Helm](https://img.shields.io/badge/Helm-0F1689?style=flat&logo=helm&logoColor=white)](https://helm.sh)
+[![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=flat&logo=prometheus&logoColor=white)](https://prometheus.io)
+[![Grafana](https://img.shields.io/badge/Grafana-F46800?style=flat&logo=grafana&logoColor=white)](https://grafana.com)
+
+**A modular observability stack for Kubernetes.**
+
+Pyrgos packages Prometheus, Grafana, Alertmanager, and core Kubernetes exporters into a single configurable Helm chart. It provides a reproducible monitoring foundation designed for declarative deployments and GitOps workflows.
 
 > [!IMPORTANT]
-> Faro is under active development. Installation instructions and configuration options are subject to change.
-
-## Overview
-
-Faro provides a configurable observability stack built around Prometheus, Grafana, and the Kubernetes monitoring ecosystem.
-
-The project focuses on reproducible deployments, centralized configuration, and integration with GitOps workflows.
-
-## Prerequisites
-
-- Kubernetes cluster
-- Helm 3
-- `kubectl` configured for cluster access
-
-## Installation
-
-Installation instructions will be available following the initial chart release.
-
-## Configuration
-
-Faro is configured through Helm values.
-
-Configuration documentation and example values files will be published as the chart develops.
+> Pyrgos is under active development. The first chart release has not yet been published. Installation steps and configuration options are subject to change.
 
 ## Components
 
 | Component | Purpose |
 | --- | --- |
-| Prometheus | Metrics collection and storage |
+| Prometheus | Metrics collection, storage, and querying |
 | Grafana | Dashboards and visualization |
-| Alertmanager | Alert routing and notifications |
-| Kubernetes exporters | Cluster and workload metrics |
+| Alertmanager | Alert grouping, routing, and notifications |
+| Kubernetes exporters | Node, kube-state, and workload metrics |
 
-Additional components may be supported in future releases.
+## Architecture
+
+```mermaid
+flowchart LR
+    subgraph Kubernetes Cluster
+        Exporters[Kubernetes Exporters]
+        Prometheus
+        Alertmanager
+        Grafana
+    end
+
+    Exporters -->|metrics| Prometheus
+    Prometheus -->|alerts| Alertmanager
+    Prometheus -->|queries| Grafana
+```
+
+## Design goals
+
+- **Reproducible** — declarative Helm packaging suitable for GitOps tools such as Argo CD
+- **Configurable** — centralized values interface for the full stack
+- **Standard** — upstream Prometheus, Grafana, and Alertmanager components
+
+## Prerequisites
+
+- Kubernetes cluster
+- Helm 3
+
+## Status
+
+Installation instructions and example values will be published with the initial chart release.
 
 ## Contributing
 
 Contributions, bug reports, and feature requests are welcome.
 
-Please open an issue before proposing significant architectural changes.
-
-Contribution guidelines will be published as the project matures.
+Please open an issue before proposing significant architectural changes. Contribution guidelines will be added as the project matures.
 
 ## License
 
-License to be determined.
+License to be determined. An OSI-approved license will be selected before the first public release.
