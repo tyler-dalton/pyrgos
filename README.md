@@ -3,7 +3,7 @@
 A Helm-based observability stack for Kubernetes, providing standardized monitoring, visualization, and alerting through cloud-native tooling.
 
 > [!IMPORTANT]
-> Panoptes is under active development. Installation instructions and configuration options are subject to change.
+> Faro is under active development. Installation instructions and configuration options are subject to change.
 
 ## Overview
 
